@@ -22,6 +22,7 @@ import Content from './components/content'
 import Footer from './components/footer';
 import Read from './components/read';
 import Create from './components/create';
+import Edit from './components/edit';
 
 // App class - extends Component Class
 class App extends Component {
@@ -49,6 +50,7 @@ class App extends Component {
             <Route path="/" exact><Content /></Route>
             <Route path="/create" ><Create /></Route>
             <Route path="/read" ><Read /></Route>
+            <Route path={"/edit/:id"} component={Edit}></Route>
           </Switch>
         </div>
       </Router>

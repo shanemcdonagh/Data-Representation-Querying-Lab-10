@@ -49,16 +49,26 @@ app.get('/', (req, res) => {
 
 // Server listening through port 4000 - Accessed by localhost:3000 (our app)
 app.listen(port, (req, res) => {
-    console.log('Listening at http://localhost:',port);
+    console.log(`Listening at http://localhost:${port}`);
 });
 
-// Returns movie based on its id
+// Returns record from the database based on its id and sends a JSON response to the client
 app.get('/api/movies/:id', (req,res)=>{
     console.log(req.params.id);
 
     movieModel.findById(req.params.id, (err,data) =>{
         res.json(data);
     });
+})
+
+// Updates record in database when put method is called from this url
+app.put('/api/movies/:id', (req,res)=>{
+    console.log("Updating " + req.params.id);
+
+    movieModel.findByIdAndUpdate(req.params.id, req.body,{new: true}, 
+        (err,data)=>{
+            res.send(data);
+        });
 })
 
 // Server receives data that was passed to /api/movies from create.js
@@ -81,13 +91,12 @@ app.post('/api/movies', (req, res) => {
     res.send("Item Added");
 });
 
-  // Finds all the data within the collection
-  movieModel.find((err, data)=> {
-    res.json(data);
-})
-
 //Listening through path with get method
 app.get('/api/movies', (req, res) => {
+
+     // Finds all the data within the collection
+     movieModel.find((err, data)=> {
+        res.json(data);
     // Create array of movies
     // const movies = [
     //     {
@@ -125,4 +134,6 @@ app.get('/api/movies', (req, res) => {
     //     mymovies: movies,
     //     'Message': 'Hello from the server'
     // });
+    
+})
 });
