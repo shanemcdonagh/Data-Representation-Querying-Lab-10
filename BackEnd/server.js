@@ -43,7 +43,7 @@ app.use(function (req, res, next) {
 });
 
 // respond with "hello world" when a GET request is made to the homepage
-app.get('/', (req, res) => {
+app.get('/', () => {
     res.send('hello world')
 });
 
