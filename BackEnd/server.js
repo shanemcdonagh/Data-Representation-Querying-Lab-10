@@ -71,6 +71,21 @@ app.put('/api/movies/:id', (req,res)=>{
         });
 })
 
+// Listens for delete method passed to this url
+app.delete('/api/movies/:id', (req,res) =>{
+    console.log("Deleting: " + req.params.id);
+
+    // Deletes movie document from collection in MongoDB
+    movieModel.deleteOne({_id:req.params.id},(error, data)=>{
+        if(error){
+            res.send(error)
+        }
+        else{
+            res.send(data);
+        }
+    });
+})
+
 // Server receives data that was passed to /api/movies from create.js
 app.post('/api/movies', (req, res) => {
     // Logs received data to the console

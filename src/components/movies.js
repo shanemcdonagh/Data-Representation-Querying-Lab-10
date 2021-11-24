@@ -12,7 +12,7 @@ class Movies extends Component {
 
             // Returns MovieItem component and passes data to the MovieItem component
             // Each child in a list should have a unique "key" prop, therefore we use the imdbID
-            return <MovieItem myfilm={film} key={film.imdbID}></MovieItem>;
+            return <MovieItem myfilm={film} key={film._id} reloadData={this.props.reloadData}></MovieItem>;
         });
     }
 }
